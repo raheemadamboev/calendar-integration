@@ -8,12 +8,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.teamgravity.calendarintegration.R
 import xyz.teamgravity.calendarintegration.core.constant.Extra
@@ -31,8 +32,6 @@ class EventCalendar : AppCompatActivity() {
     private val viewmodel by viewModels<EventCalendarViewModel>()
 
     private lateinit var launcher: ActivityResultLauncher<String>
-
-    private var eventsJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,10 +55,9 @@ class EventCalendar : AppCompatActivity() {
 
     private fun observe() {
         if (!checkPermission()) return
-        eventsJob?.cancel()
-        eventsJob = lifecycleScope.launch {
-            viewmodel.events.collectLatest { events ->
-                if (events.ready) updateUI(events.data)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                updateUI(viewmodel.events.first().toList())
             }
         }
     }

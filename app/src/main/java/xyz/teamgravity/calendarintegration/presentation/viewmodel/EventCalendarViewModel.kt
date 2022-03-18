@@ -15,17 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EventCalendarViewModel @Inject constructor(
-    private val repository: CalendarIntegrationRepository
+    repository: CalendarIntegrationRepository
 ) : ViewModel() {
 
-    private val _events = MutableStateFlow(FlowWrapper.default(emptyList<EventModel>()))
-    val events: StateFlow<FlowWrapper<List<EventModel>>> = _events.asStateFlow()
-
-    init {
-        viewModelScope.launch {
-            repository.getEvents().collectLatest { data ->
-                _events.emit(FlowWrapper.ready(data.toList()))
-            }
-        }
-    }
+    val events = repository.getEvents()
 }
