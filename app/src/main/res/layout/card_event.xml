@@ -1,6 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/SimpleMaterialCard"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="3dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/title_t"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/muli"
+            android:textColor="?attr/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="@string/your_title" />
+
+        <TextView
+            android:id="@+id/description_t"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/muli"
+            android:lineSpacingExtra="3dp"
+            android:textColor="?attr/text_primary"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:text="@string/your_description"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/start_date_t"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/muli"
+            android:textColor="?attr/text_primary"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:text="@string/your_start_date"
+            tools:visibility="visible" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/muli"
+            android:textColor="?attr/text_primary"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:text="@string/your_end_date"
+            tools:visibility="visible" />
+    </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Calendar Integration</string>
+
+    <!-- EventList -->
+    <string name="your_title">Title: %1$s</string>
+    <string name="your_description">Description: %1$s</string>
+    <string name="your_start_date">Start date: %1$s</string>
+    <string name="your_end_date">End date: %1$s</string>
 </resources>
