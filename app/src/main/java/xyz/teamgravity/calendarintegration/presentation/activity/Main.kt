@@ -9,32 +9,32 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
+import dagger.hilt.android.AndroidEntryPoint
 import xyz.teamgravity.calendarintegration.R
 import xyz.teamgravity.calendarintegration.core.constant.Extra
 import xyz.teamgravity.calendarintegration.core.resolver.EventContentResolver
 import xyz.teamgravity.calendarintegration.databinding.ActivityMainBinding
 import java.util.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class Main : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    @Inject
+    lateinit var resolver: EventContentResolver
+
     private lateinit var launcher: ActivityResultLauncher<String>
-    private lateinit var resolver: EventContentResolver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        lateInIt()
         launcher()
         updateUI()
         button()
-    }
-
-    private fun lateInIt() {
-        resolver = EventContentResolver(this)
     }
 
     private fun launcher() {
@@ -44,9 +44,9 @@ class Main : AppCompatActivity() {
     }
 
     private fun updateUI() {
-        if (!checkPermission()) return
-
         binding.apply {
+            if (!checkPermission()) return
+
             calendar.setEvents(buildCalendarEvents())
         }
     }
