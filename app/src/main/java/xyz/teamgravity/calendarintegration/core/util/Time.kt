@@ -3,6 +3,7 @@ package xyz.teamgravity.calendarintegration.core.util
 import java.util.*
 
 object Time {
+
     /**
      * return minimum day for comparing time in millis for sql
      */
