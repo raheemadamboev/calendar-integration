@@ -4,6 +4,9 @@ import java.util.*
 
 object Time {
 
+    const val FULL_TIME_FORMATTER = "fullTimeFormatter"
+    const val ONLY_DATE_FORMATTER = "onlyDateFormatter"
+
     /**
      * return minimum day for comparing time in millis for sql
      */

@@ -7,11 +7,12 @@ import xyz.teamgravity.calendarintegration.core.constant.Extra
 import xyz.teamgravity.calendarintegration.core.extension.gone
 import xyz.teamgravity.calendarintegration.core.extension.visible
 import xyz.teamgravity.calendarintegration.core.resolver.EventContentResolver
+import xyz.teamgravity.calendarintegration.core.util.Time
 import xyz.teamgravity.calendarintegration.databinding.ActivityEventListBinding
-import xyz.teamgravity.calendarintegration.injection.FullTimeFormatter
 import xyz.teamgravity.calendarintegration.presentation.adapter.EventListAdapter
 import java.text.SimpleDateFormat
 import javax.inject.Inject
+import javax.inject.Named
 
 @AndroidEntryPoint
 class EventList : AppCompatActivity() {
@@ -25,7 +26,7 @@ class EventList : AppCompatActivity() {
     lateinit var resolver: EventContentResolver
 
     @Inject
-    @FullTimeFormatter
+    @Named(Time.ONLY_DATE_FORMATTER)
     lateinit var formatter: SimpleDateFormat
 
     override fun onCreate(savedInstanceState: Bundle?) {

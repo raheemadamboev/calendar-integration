@@ -7,8 +7,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import xyz.teamgravity.calendarintegration.core.resolver.EventContentResolver
+import xyz.teamgravity.calendarintegration.core.util.Time
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -21,6 +23,11 @@ object ApplicationModule {
 
     @Provides
     @Singleton
-    @FullTimeFormatter
+    @Named(Time.FULL_TIME_FORMATTER)
     fun provideFullTimeFormatter(): SimpleDateFormat = SimpleDateFormat("yyyy, MMMM d, HH:mm", Locale.getDefault())
+
+    @Provides
+    @Singleton
+    @Named(Time.ONLY_DATE_FORMATTER)
+    fun provideOnlyDateFormatter(): SimpleDateFormat = SimpleDateFormat("yyyy, MMMM d", Locale.getDefault())
 }
