@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="xyz.teamgravity.calendarintegration">
 
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,5 +21,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
