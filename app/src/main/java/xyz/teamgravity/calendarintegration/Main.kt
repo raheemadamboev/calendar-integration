@@ -1,5 +1,6 @@
 package xyz.teamgravity.calendarintegration
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
@@ -7,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.applandeo.materialcalendarview.EventDay
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import xyz.teamgravity.calendarintegration.databinding.ActivityMainBinding
 import java.util.*
 
@@ -25,6 +27,7 @@ class Main : AppCompatActivity() {
         lateInIt()
         launcher()
         updateUI()
+        button()
     }
 
     private fun lateInIt() {
@@ -45,6 +48,10 @@ class Main : AppCompatActivity() {
         }
     }
 
+    private fun button() {
+        onCalendar()
+    }
+
     private fun checkPermission(): Boolean {
         return ContextCompat.checkSelfPermission(this, EventContentResolver.PERMISSION) == PackageManager.PERMISSION_GRANTED
     }
@@ -61,6 +68,16 @@ class Main : AppCompatActivity() {
                 drawableRes = R.drawable.ic_event
             )
         }
+    }
+
+    private fun onCalendar() {
+        binding.calendar.setOnDayClickListener(object : OnDayClickListener {
+            override fun onDayClick(eventDay: EventDay) {
+                val intent = Intent(this@Main, Events::class.java)
+                intent.putExtra(Extra.SELECTED_TIME, eventDay.calendar.timeInMillis)
+                startActivity(intent)
+            }
+        })
     }
 
     override fun onResume() {
