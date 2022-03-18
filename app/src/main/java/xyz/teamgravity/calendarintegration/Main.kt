@@ -6,7 +6,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.applandeo.materialcalendarview.EventDay
 import xyz.teamgravity.calendarintegration.databinding.ActivityMainBinding
+import java.util.*
 
 class Main : AppCompatActivity() {
 
@@ -39,7 +41,7 @@ class Main : AppCompatActivity() {
         if (!checkPermission()) return
 
         binding.apply {
-
+            calendar.setEvents(buildCalendarEvents())
         }
     }
 
@@ -49,6 +51,16 @@ class Main : AppCompatActivity() {
 
     private fun requestPermission() {
         launcher.launch(EventContentResolver.PERMISSION)
+    }
+
+    private fun buildCalendarEvents(): List<EventDay> {
+        val events = resolver.getEvents()
+        return events.map {
+            EventDay(
+                day = Calendar.getInstance().apply { timeInMillis = it.startDate },
+                drawableRes = R.drawable.ic_event
+            )
+        }
     }
 
     override fun onResume() {
