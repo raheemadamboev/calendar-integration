@@ -4,20 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/background_layout"
     tools:context=".presentation.activity.Main">
 
     <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/calendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:abbreviationsBarColor="@color/orange_ville_200"
-        app:abbreviationsLabelsColor="@color/white"
+        app:abbreviationsBarColor="?attr/colorSecondary"
+        app:abbreviationsLabelsColor="?attr/text_button"
         app:firstDayOfWeek="monday"
-        app:headerColor="@color/orange_ville_500"
+        app:headerColor="?attr/colorPrimary"
         app:layout_constraintTop_toTopOf="parent"
-        app:selectionColor="@color/orange_ville_500"
-        app:selectionLabelColor="@color/white"
-        app:todayLabelColor="@color/orange_ville_500"
+        app:selectionColor="?attr/colorPrimary"
+        app:selectionLabelColor="?attr/text_button"
+        app:todayLabelColor="?attr/colorPrimary"
         app:type="classic"
         app:typeface="@font/muli" />
 </androidx.constraintlayout.widget.ConstraintLayout>
