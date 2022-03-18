@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- layout background color -->
+    <attr name="background_layout" format="reference" />
+
+    <!-- card background color -->
+    <attr name="background_card" format="reference" />
+
+    <!-- primary text color -->
+    <attr name="text_primary" format="reference" />
+
+    <!-- button text color -->
+    <attr name="text_button" format="reference" />
+
+    <!-- card ripple color -->
+    <attr name="ripple_card" format="reference" />
+</resources>
