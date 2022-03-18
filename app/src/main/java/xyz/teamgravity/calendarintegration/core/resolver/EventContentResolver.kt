@@ -16,7 +16,7 @@ class EventContentResolver(context: Context) {
 
     companion object {
         val URI: Uri = Uri.parse("content://com.android.calendar/events")
-        const val PERMISSION = Manifest.permission.READ_CALENDAR
+        val PERMISSION = arrayOf(Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR)
     }
 
     private val resolver = context.contentResolver

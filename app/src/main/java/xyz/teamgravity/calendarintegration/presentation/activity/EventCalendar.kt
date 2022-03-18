@@ -31,7 +31,7 @@ class EventCalendar : AppCompatActivity() {
 
     private val viewmodel by viewModels<EventCalendarViewModel>()
 
-    private lateinit var launcher: ActivityResultLauncher<String>
+    private lateinit var launcher: ActivityResultLauncher<Array<String>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +44,8 @@ class EventCalendar : AppCompatActivity() {
     }
 
     private fun launcher() {
-        launcher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-            if (granted) observe()
+        launcher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { granted ->
+            if (granted.all { true }) observe()
         }
     }
 
@@ -74,7 +74,7 @@ class EventCalendar : AppCompatActivity() {
     }
 
     private fun checkPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(this, EventContentResolver.PERMISSION) == PackageManager.PERMISSION_GRANTED
+        return EventContentResolver.PERMISSION.all { ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED }
     }
 
     private fun requestPermission() {
