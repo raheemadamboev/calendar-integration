@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/background_layout"
-    tools:context=".presentation.activity.Main">
+    tools:context=".presentation.activity.EventCalendar">
 
     <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/calendar"

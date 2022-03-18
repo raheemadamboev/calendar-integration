@@ -13,14 +13,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import xyz.teamgravity.calendarintegration.R
 import xyz.teamgravity.calendarintegration.core.constant.Extra
 import xyz.teamgravity.calendarintegration.core.resolver.EventContentResolver
-import xyz.teamgravity.calendarintegration.databinding.ActivityMainBinding
+import xyz.teamgravity.calendarintegration.databinding.ActivityEventCalendarBinding
 import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class Main : AppCompatActivity() {
+class EventCalendar : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityEventCalendarBinding
 
     @Inject
     lateinit var resolver: EventContentResolver
@@ -29,7 +29,7 @@ class Main : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityEventCalendarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         launcher()
@@ -75,7 +75,7 @@ class Main : AppCompatActivity() {
     private fun onCalendar() {
         binding.calendar.setOnDayClickListener(object : OnDayClickListener {
             override fun onDayClick(eventDay: EventDay) {
-                val intent = Intent(this@Main, EventList::class.java)
+                val intent = Intent(this@EventCalendar, EventList::class.java)
                 intent.putExtra(Extra.SELECTED_TIME, eventDay.calendar.timeInMillis)
                 startActivity(intent)
             }

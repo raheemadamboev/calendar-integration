@@ -16,7 +16,7 @@
             android:name=".presentation.activity.EventList"
             android:exported="false" />
         <activity
-            android:name=".presentation.activity.Main"
+            android:name=".presentation.activity.EventCalendar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
