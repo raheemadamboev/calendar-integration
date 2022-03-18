@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.provider.CalendarContract
-import java.util.*
 
 @SuppressLint("Range")
 class EventContentResolver(
@@ -61,7 +60,7 @@ class EventContentResolver(
         return events
     }
 
-    fun getEventsByDate(date: Date) {
+    fun getEventsByDate(time: Long): HashSet<EventModel> {
         val events = hashSetOf<EventModel>()
 
         val cursor = resolver.query(
@@ -73,7 +72,7 @@ class EventContentResolver(
                 CalendarContract.Events.DTEND
             ),
             CalendarContract.Events.DTSTART + " > ? AND " + CalendarContract.Events.DTSTART + " < ?",
-            arrayOf(Time.minDay(date.time).toString(), Time.maxDay(date.time).toString()),
+            arrayOf(Time.minDay(time).toString(), Time.maxDay(time).toString()),
             null
         )
 
