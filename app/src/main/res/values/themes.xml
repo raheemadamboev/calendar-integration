@@ -2,7 +2,7 @@
 
     <style name="Theme.CalendarIntegration" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/orange_ville_500</item>
-        <item name="colorPrimaryVariant">@color/orange_ville_700</item>
+        <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/orange_ville_200</item>
         <item name="colorSecondaryVariant">@color/orange_ville_700</item>

@@ -46,19 +46,16 @@
             android:fontFamily="@font/muli"
             android:textColor="?attr/text_primary"
             android:textSize="14sp"
-            android:visibility="gone"
-            tools:text="@string/your_start_date"
-            tools:visibility="visible" />
+            tools:text="@string/your_start_date" />
 
         <TextView
+            android:id="@+id/end_date_t"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/muli"
             android:textColor="?attr/text_primary"
             android:textSize="14sp"
-            android:visibility="gone"
-            tools:text="@string/your_end_date"
-            tools:visibility="visible" />
+            tools:text="@string/your_end_date" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
