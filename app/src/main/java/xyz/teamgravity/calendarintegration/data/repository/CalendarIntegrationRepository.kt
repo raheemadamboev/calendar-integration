@@ -12,6 +12,10 @@ class CalendarIntegrationRepository(
     // Get
     ///////////////////////////////////////////////////////////////////////////
 
+    fun getEvents(): Flow<HashSet<EventModel>> {
+        return resolver.getEvents()
+    }
+
     fun getDateEvents(time: Long): Flow<HashSet<EventModel>> {
         return resolver.getDateEvents(time)
     }

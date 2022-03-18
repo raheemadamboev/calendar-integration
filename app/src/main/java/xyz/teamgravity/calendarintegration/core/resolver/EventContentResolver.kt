@@ -25,7 +25,7 @@ class EventContentResolver(context: Context) {
     // Get
     ///////////////////////////////////////////////////////////////////////////
 
-    fun getEvents(): HashSet<EventModel> {
+    fun getEvents(): Flow<HashSet<EventModel>> = flow {
         val events = hashSetOf<EventModel>()
 
         val cursor = resolver.query(
@@ -67,7 +67,7 @@ class EventContentResolver(context: Context) {
         }
 
         cursor?.close()
-        return events
+        emit(events)
     }
 
     fun getDateEvents(time: Long): Flow<HashSet<EventModel>> = flow {

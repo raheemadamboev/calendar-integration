@@ -5,27 +5,34 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import xyz.teamgravity.calendarintegration.R
 import xyz.teamgravity.calendarintegration.core.constant.Extra
 import xyz.teamgravity.calendarintegration.core.resolver.EventContentResolver
+import xyz.teamgravity.calendarintegration.data.model.EventModel
 import xyz.teamgravity.calendarintegration.databinding.ActivityEventCalendarBinding
+import xyz.teamgravity.calendarintegration.presentation.viewmodel.EventCalendarViewModel
 import java.util.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class EventCalendar : AppCompatActivity() {
 
     private lateinit var binding: ActivityEventCalendarBinding
 
-    @Inject
-    lateinit var resolver: EventContentResolver
+    private val viewmodel by viewModels<EventCalendarViewModel>()
 
     private lateinit var launcher: ActivityResultLauncher<String>
+
+    private var eventsJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,26 +40,39 @@ class EventCalendar : AppCompatActivity() {
         setContentView(binding.root)
 
         launcher()
-        updateUI()
         button()
+        observe()
     }
 
     private fun launcher() {
         launcher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-            if (granted) updateUI()
-        }
-    }
-
-    private fun updateUI() {
-        binding.apply {
-            if (!checkPermission()) return
-
-            calendar.setEvents(buildCalendarEvents())
+            if (granted) observe()
         }
     }
 
     private fun button() {
         onCalendar()
+    }
+
+    private fun observe() {
+        if (!checkPermission()) return
+        eventsJob?.cancel()
+        eventsJob = lifecycleScope.launch {
+            viewmodel.events.collectLatest { events ->
+                if (events.ready) updateUI(events.data)
+            }
+        }
+    }
+
+    private fun updateUI(events: List<EventModel>) {
+        binding.calendar.setEvents(
+            events.map {
+                EventDay(
+                    day = Calendar.getInstance().apply { timeInMillis = it.startDate },
+                    drawableRes = R.drawable.ic_event
+                )
+            }
+        )
     }
 
     private fun checkPermission(): Boolean {
@@ -61,15 +81,6 @@ class EventCalendar : AppCompatActivity() {
 
     private fun requestPermission() {
         launcher.launch(EventContentResolver.PERMISSION)
-    }
-
-    private fun buildCalendarEvents(): List<EventDay> {
-        return resolver.getEvents().map {
-            EventDay(
-                day = Calendar.getInstance().apply { timeInMillis = it.startDate },
-                drawableRes = R.drawable.ic_event
-            )
-        }
     }
 
     private fun onCalendar() {
