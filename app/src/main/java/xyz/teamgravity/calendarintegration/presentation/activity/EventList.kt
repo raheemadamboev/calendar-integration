@@ -3,9 +3,11 @@ package xyz.teamgravity.calendarintegration.presentation.activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.teamgravity.calendarintegration.core.constant.Extra
 import xyz.teamgravity.calendarintegration.core.extension.gone
@@ -60,11 +62,10 @@ class EventList : AppCompatActivity() {
 
     private fun observe() {
         lifecycleScope.launch {
-            viewmodel.events.collectLatest { events ->
-                if (events.ready) {
-                    adapter.submitList(events.data)
-                    hideEmptyLayout(events.data.size)
-                }
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                val data = viewmodel.events.first().toList()
+                adapter.submitList(data)
+                hideEmptyLayout(data.size)
             }
         }
     }
