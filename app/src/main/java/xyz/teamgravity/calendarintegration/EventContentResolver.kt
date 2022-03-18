@@ -1,5 +1,6 @@
 package xyz.teamgravity.calendarintegration
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
@@ -11,6 +12,7 @@ class EventContentResolver(
 
     companion object {
         val URI: Uri = Uri.parse("content://com.android.calendar/events")
+        val PERMISSION = Manifest.permission.READ_CALENDAR
     }
 
     private val resolver = context.contentResolver
