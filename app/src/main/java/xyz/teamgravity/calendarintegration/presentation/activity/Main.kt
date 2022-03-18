@@ -1,4 +1,4 @@
-package xyz.teamgravity.calendarintegration
+package xyz.teamgravity.calendarintegration.presentation.activity
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
+import xyz.teamgravity.calendarintegration.EventContentResolver
+import xyz.teamgravity.calendarintegration.core.constant.Extra
+import xyz.teamgravity.calendarintegration.R
 import xyz.teamgravity.calendarintegration.databinding.ActivityMainBinding
 import java.util.*
 
@@ -73,7 +76,7 @@ class Main : AppCompatActivity() {
     private fun onCalendar() {
         binding.calendar.setOnDayClickListener(object : OnDayClickListener {
             override fun onDayClick(eventDay: EventDay) {
-                val intent = Intent(this@Main, Events::class.java)
+                val intent = Intent(this@Main, EventList::class.java)
                 intent.putExtra(Extra.SELECTED_TIME, eventDay.calendar.timeInMillis)
                 startActivity(intent)
             }

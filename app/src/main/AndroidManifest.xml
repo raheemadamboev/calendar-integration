@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CalendarIntegration">
         <activity
-            android:name=".Events"
+            android:name=".presentation.activity.EventList"
             android:exported="false" />
         <activity
-            android:name=".Main"
+            android:name=".presentation.activity.Main"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

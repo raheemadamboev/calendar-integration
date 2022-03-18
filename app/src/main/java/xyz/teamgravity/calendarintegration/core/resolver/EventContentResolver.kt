@@ -1,10 +1,12 @@
-package xyz.teamgravity.calendarintegration
+package xyz.teamgravity.calendarintegration.core.resolver
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.provider.CalendarContract
+import xyz.teamgravity.calendarintegration.core.util.Time
+import xyz.teamgravity.calendarintegration.data.model.EventModel
 
 @SuppressLint("Range")
 class EventContentResolver(

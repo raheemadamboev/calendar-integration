@@ -1,10 +1,10 @@
-package xyz.teamgravity.calendarintegration
+package xyz.teamgravity.calendarintegration.presentation.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import xyz.teamgravity.calendarintegration.databinding.ActivityEventsBinding
 
-class Events : AppCompatActivity() {
+class EventList : AppCompatActivity() {
 
     private lateinit var binding: ActivityEventsBinding
 

@@ -1,4 +1,4 @@
-package xyz.teamgravity.calendarintegration
+package xyz.teamgravity.calendarintegration.data.model
 
 data class EventModel(
     val title: String,

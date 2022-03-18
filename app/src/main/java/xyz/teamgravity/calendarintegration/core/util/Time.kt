@@ -1,4 +1,4 @@
-package xyz.teamgravity.calendarintegration
+package xyz.teamgravity.calendarintegration.core.util
 
 import java.util.*
 
