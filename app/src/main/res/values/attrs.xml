@@ -9,6 +9,9 @@
     <!-- primary text color -->
     <attr name="text_primary" format="reference" />
 
+    <!-- secondary text color -->
+    <attr name="text_secondary" format="reference" />
+
     <!-- button text color -->
     <attr name="text_button" format="reference" />
 

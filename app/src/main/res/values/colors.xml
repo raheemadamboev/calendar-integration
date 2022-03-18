@@ -6,6 +6,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="super_light_white">#F2F2F2</color>
+    <color name="play_store_gray">#474747</color>
 
     <color name="orange_ville_ripple">#30E17055</color>
 </resources>

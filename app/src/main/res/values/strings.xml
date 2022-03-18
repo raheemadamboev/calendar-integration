@@ -6,4 +6,5 @@
     <string name="your_description">Description: %1$s</string>
     <string name="your_start_date">Start date: %1$s</string>
     <string name="your_end_date">End date: %1$s</string>
+    <string name="nothing_found">Nothing has been found</string>
 </resources>
