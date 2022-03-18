@@ -1,15 +1,19 @@
 package xyz.teamgravity.calendarintegration.presentation.activity
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import xyz.teamgravity.calendarintegration.core.constant.Extra
 import xyz.teamgravity.calendarintegration.core.extension.gone
 import xyz.teamgravity.calendarintegration.core.extension.visible
-import xyz.teamgravity.calendarintegration.core.resolver.EventContentResolver
 import xyz.teamgravity.calendarintegration.core.util.Time
 import xyz.teamgravity.calendarintegration.databinding.ActivityEventListBinding
 import xyz.teamgravity.calendarintegration.presentation.adapter.EventListAdapter
+import xyz.teamgravity.calendarintegration.presentation.viewmodel.EventListViewModel
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 import javax.inject.Named
@@ -19,11 +23,10 @@ class EventList : AppCompatActivity() {
 
     private lateinit var binding: ActivityEventListBinding
 
-    @Inject
-    lateinit var adapter: EventListAdapter
+    private val viewmodel by viewModels<EventListViewModel>()
 
     @Inject
-    lateinit var resolver: EventContentResolver
+    lateinit var adapter: EventListAdapter
 
     @Inject
     @Named(Time.ONLY_DATE_FORMATTER)
@@ -37,6 +40,7 @@ class EventList : AppCompatActivity() {
         button()
         recyclerview()
         updateUI()
+        observe()
     }
 
     private fun button() {
@@ -51,13 +55,17 @@ class EventList : AppCompatActivity() {
     }
 
     private fun updateUI() {
-        binding.apply {
-            val selectedTime = intent.getLongExtra(Extra.SELECTED_TIME, System.currentTimeMillis())
-            headerT.text = formatter.format(selectedTime)
+        binding.headerT.text = formatter.format(intent.getLongExtra(Extra.SELECTED_TIME, System.currentTimeMillis()))
+    }
 
-            val events = resolver.getEventsByDate(selectedTime).toList()
-            adapter.submitList(events)
-            hideEmptyLayout(events.size)
+    private fun observe() {
+        lifecycleScope.launch {
+            viewmodel.events.collectLatest { events ->
+                if (events.ready) {
+                    adapter.submitList(events.data)
+                    hideEmptyLayout(events.data.size)
+                }
+            }
         }
     }
 

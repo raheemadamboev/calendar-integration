@@ -5,6 +5,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.provider.CalendarContract
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import xyz.teamgravity.calendarintegration.core.extension.raheem
 import xyz.teamgravity.calendarintegration.core.util.Time
 import xyz.teamgravity.calendarintegration.data.model.EventModel
@@ -18,6 +20,10 @@ class EventContentResolver(context: Context) {
     }
 
     private val resolver = context.contentResolver
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Get
+    ///////////////////////////////////////////////////////////////////////////
 
     fun getEvents(): HashSet<EventModel> {
         val events = hashSetOf<EventModel>()
@@ -64,7 +70,7 @@ class EventContentResolver(context: Context) {
         return events
     }
 
-    fun getEventsByDate(time: Long): HashSet<EventModel> {
+    fun getDateEvents(time: Long): Flow<HashSet<EventModel>> = flow {
         val events = hashSetOf<EventModel>()
 
         val cursor = resolver.query(
@@ -106,6 +112,6 @@ class EventContentResolver(context: Context) {
         }
 
         cursor?.close()
-        return events
+        emit(events)
     }
 }

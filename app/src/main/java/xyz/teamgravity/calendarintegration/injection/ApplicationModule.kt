@@ -8,6 +8,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import xyz.teamgravity.calendarintegration.core.resolver.EventContentResolver
 import xyz.teamgravity.calendarintegration.core.util.Time
+import xyz.teamgravity.calendarintegration.data.repository.CalendarIntegrationRepository
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Named
@@ -20,6 +21,11 @@ object ApplicationModule {
     @Provides
     @Singleton
     fun provideEventContentResolver(@ApplicationContext context: Context): EventContentResolver = EventContentResolver(context)
+
+    @Provides
+    @Singleton
+    fun provideCalendarIntegrationRepository(resolver: EventContentResolver): CalendarIntegrationRepository =
+        CalendarIntegrationRepository(resolver)
 
     @Provides
     @Singleton
