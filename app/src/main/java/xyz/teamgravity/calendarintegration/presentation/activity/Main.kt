@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
-import xyz.teamgravity.calendarintegration.EventContentResolver
-import xyz.teamgravity.calendarintegration.core.constant.Extra
 import xyz.teamgravity.calendarintegration.R
+import xyz.teamgravity.calendarintegration.core.constant.Extra
+import xyz.teamgravity.calendarintegration.core.resolver.EventContentResolver
 import xyz.teamgravity.calendarintegration.databinding.ActivityMainBinding
 import java.util.*
 
@@ -38,8 +38,8 @@ class Main : AppCompatActivity() {
     }
 
     private fun launcher() {
-        launcher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-            updateUI()
+        launcher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) updateUI()
         }
     }
 
@@ -64,8 +64,7 @@ class Main : AppCompatActivity() {
     }
 
     private fun buildCalendarEvents(): List<EventDay> {
-        val events = resolver.getEvents()
-        return events.map {
+        return resolver.getEvents().map {
             EventDay(
                 day = Calendar.getInstance().apply { timeInMillis = it.startDate },
                 drawableRes = R.drawable.ic_event
