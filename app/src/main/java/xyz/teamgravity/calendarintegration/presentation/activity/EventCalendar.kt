@@ -87,6 +87,7 @@ class EventCalendar : AppCompatActivity() {
                 val intent = Intent(this@EventCalendar, EventList::class.java)
                 intent.putExtra(Extra.SELECTED_TIME, eventDay.calendar.timeInMillis)
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
         })
     }

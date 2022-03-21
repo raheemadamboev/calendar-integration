@@ -10,6 +10,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import xyz.teamgravity.calendarintegration.R
 import xyz.teamgravity.calendarintegration.core.constant.Extra
 import xyz.teamgravity.calendarintegration.core.extension.gone
 import xyz.teamgravity.calendarintegration.core.extension.visible
@@ -100,6 +101,12 @@ class EventList : AppCompatActivity() {
             val intent = Intent(this, EventAdd::class.java)
             intent.putExtra(Extra.SELECTED_TIME, selectedTime)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_up, R.anim.fade_out)
         }
+    }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 }

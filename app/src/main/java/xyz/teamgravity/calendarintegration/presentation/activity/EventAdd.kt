@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import xyz.teamgravity.calendarintegration.R
 import xyz.teamgravity.calendarintegration.core.extension.clearErrorFocus
 import xyz.teamgravity.calendarintegration.core.extension.fieldError
 import xyz.teamgravity.calendarintegration.core.extension.text
@@ -76,5 +77,10 @@ class EventAdd : AppCompatActivity() {
         binding.saveB.setOnClickListener {
             validateInputs()
         }
+    }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.fade_in, R.anim.slide_down)
     }
 }
