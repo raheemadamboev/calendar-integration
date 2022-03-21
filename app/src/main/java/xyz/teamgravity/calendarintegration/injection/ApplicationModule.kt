@@ -6,7 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import xyz.teamgravity.calendarintegration.core.resolver.EventContentResolver
+import xyz.teamgravity.calendarintegration.data.resolver.EventContentResolver
 import xyz.teamgravity.calendarintegration.core.util.Time
 import xyz.teamgravity.calendarintegration.data.repository.CalendarIntegrationRepository
 import java.text.SimpleDateFormat

@@ -1,15 +1,19 @@
-package xyz.teamgravity.calendarintegration.core.resolver
+package xyz.teamgravity.calendarintegration.data.resolver
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.provider.CalendarContract
+import androidx.core.content.contentValuesOf
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 import xyz.teamgravity.calendarintegration.core.extension.raheem
 import xyz.teamgravity.calendarintegration.core.util.Time
 import xyz.teamgravity.calendarintegration.data.model.EventModel
+import java.util.*
 
 @SuppressLint("Range")
 class EventContentResolver(context: Context) {
@@ -20,6 +24,26 @@ class EventContentResolver(context: Context) {
     }
 
     private val resolver = context.contentResolver
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Insert
+    ///////////////////////////////////////////////////////////////////////////
+
+    suspend fun insertEvent(event: EventModel) {
+        withContext(Dispatchers.IO) {
+            resolver.insert(
+                URI,
+                contentValuesOf(
+                    CalendarContract.Events.CALENDAR_ID to 1, // TODO you have to ask for calendar id, its different in each device! works for Xiaomi Redmi Note 8 Pro
+                    CalendarContract.Events.TITLE to event.title,
+                    CalendarContract.Events.DESCRIPTION to event.description,
+                    CalendarContract.Events.DTSTART to event.startDate,
+                    CalendarContract.Events.DTEND to event.endDate,
+                    CalendarContract.Events.EVENT_TIMEZONE to TimeZone.getDefault().id
+                )
+            )
+        }
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     // Get

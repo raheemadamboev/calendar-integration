@@ -12,6 +12,12 @@
     <!-- secondary text color -->
     <attr name="text_secondary" format="reference" />
 
+    <!-- error text color -->
+    <attr name="text_error" format="reference" />
+
+    <!-- text input color -->
+    <attr name="text_input" format="reference" />
+
     <!-- button text color -->
     <attr name="text_button" format="reference" />
 

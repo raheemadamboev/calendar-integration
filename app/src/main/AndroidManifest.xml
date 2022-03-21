@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CalendarIntegration">
         <activity
+            android:name=".presentation.activity.EventAdd"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".presentation.activity.EventList"
             android:exported="false" />
         <activity

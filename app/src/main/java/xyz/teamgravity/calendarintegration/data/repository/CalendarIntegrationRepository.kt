@@ -1,12 +1,24 @@
 package xyz.teamgravity.calendarintegration.data.repository
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import xyz.teamgravity.calendarintegration.core.resolver.EventContentResolver
+import kotlinx.coroutines.withContext
 import xyz.teamgravity.calendarintegration.data.model.EventModel
+import xyz.teamgravity.calendarintegration.data.resolver.EventContentResolver
 
 class CalendarIntegrationRepository(
     private val resolver: EventContentResolver
 ) {
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Insert
+    ///////////////////////////////////////////////////////////////////////////
+
+    suspend fun insertEvent(event: EventModel) {
+        withContext(Dispatchers.IO) {
+            resolver.insertEvent(event)
+        }
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     // Get

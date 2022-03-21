@@ -7,4 +7,10 @@
     <string name="your_start_date">Start date: %1$s</string>
     <string name="your_end_date">End date: %1$s</string>
     <string name="nothing_found">Nothing has been found</string>
+
+    <!-- EventAdd -->
+    <string name="add_event">Add event</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="error_field">Please fill this field</string>
 </resources>

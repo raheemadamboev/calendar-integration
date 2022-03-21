@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/background_layout"
-    tools:context=".presentation.activity.EventList">
+    tools:context=".presentation.activity.EventAdd">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
@@ -21,7 +21,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/ic_back"
+            android:background="@drawable/ic_close"
             android:backgroundTint="?attr/text_button"
             android:contentDescription="@string/app_name"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -29,76 +29,65 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/header_t"
+            android:id="@+id/header_text"
             style="@style/ScreenHeaderText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
+            android:text="@string/add_event"
             app:layout_constraintBottom_toBottomOf="@id/back_b"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/back_b"
-            app:layout_constraintTop_toTopOf="@id/back_b"
-            tools:text="24 December" />
+            app:layout_constraintTop_toTopOf="@id/back_b" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/title_field"
+        style="@style/ClearTextTextInput"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:hint="@string/title"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/SimpleEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layoutAnimation="@anim/scale_up_layout_anim"
-            android:orientation="vertical"
-            android:scrollbars="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:inputType="textCapSentences"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
-            android:id="@+id/empty_layout"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/description_field"
+        style="@style/ClearTextTextInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:hint="@string/description"
+        app:layout_constraintTop_toBottomOf="@id/title_field">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/SimpleEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3"
-            tools:visibility="visible">
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:contentDescription="@string/app_name"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/ic_empty_box" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
-                android:fontFamily="@font/muli_bold"
-                android:text="@string/nothing_found"
-                android:textAlignment="center"
-                android:textColor="?attr/text_secondary"
-                android:textSize="17sp" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="match_parent"
+            android:inputType="textCapSentences"
+            android:maxLines="5" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_b"
+        android:id="@+id/save_b"
         style="@style/SimpleFloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/ic_done"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

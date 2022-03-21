@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.teamgravity.calendarintegration.R
 import xyz.teamgravity.calendarintegration.core.constant.Extra
-import xyz.teamgravity.calendarintegration.core.resolver.EventContentResolver
+import xyz.teamgravity.calendarintegration.data.resolver.EventContentResolver
 import xyz.teamgravity.calendarintegration.data.model.EventModel
 import xyz.teamgravity.calendarintegration.databinding.ActivityEventCalendarBinding
 import xyz.teamgravity.calendarintegration.presentation.viewmodel.EventCalendarViewModel
