@@ -1,6 +1,6 @@
 # calendar-integration
 
-<img align="right" width="296" height="500"  src="https://github.com/raheemadamboev/calendar-integration/blob/master/banner.gif" />
+<img align="right" width="296" height="600"  src="https://github.com/raheemadamboev/calendar-integration/blob/master/banner.gif" />
 
 MVVM application to read and write calendar events to device's database using Content Providers.
 
